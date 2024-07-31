@@ -17,9 +17,9 @@
        "items": [
           {
              "name": "Оплата электрозарядки",
-             "price": 12.0,
+             "price": 1.0,
              "quantity": 1.0,
-             "sum": 12,
+             "sum": 1,
              "payment_method": "full_payment",
              "payment_object": "service",
              "vat": {
@@ -45,7 +45,7 @@
           }
        ],
        "additional_check_props": "25245435",
-       "total": 12.0,
+       "total": 1.0,
        "additional_user_props": {
           "name": "доп реквизит пользователя",
           "value": "значение доп реквизита пользователя"
