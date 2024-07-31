@@ -2,10 +2,10 @@ from request.parsing.from_props import read_properties
 import json
 import requests
 
-prop_file = './testing/props.properties'
+prop_file = './props.properties'
 props = read_properties(prop_file)
 
-json_file = './testing/request/make_check/register_test_sell_check.json'
+json_file = './request/make_check/register_test_sell_check.json'
 
 with open(json_file, 'r', errors='ignore', encoding='utf-8') as file:
     json_data = json.load(file)
