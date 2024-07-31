@@ -44,10 +44,6 @@
           }
        ],
        "additional_check_props": "25245435",
-       "total": 1.0,
-       "additional_user_props": {
-          "name": "доп реквизит пользователя",
-          "value": "значение доп реквизита пользователя"
-       }
+       "total": 1.0
     }
  }
