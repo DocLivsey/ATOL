@@ -1,4 +1,5 @@
 from request.parsing.from_props import read_properties
+import uuid
 import json
 import requests
 
@@ -9,7 +10,10 @@ json_file = './request/make_check/register_test_sell_check.json'
 
 with open(json_file, 'r', errors='ignore', encoding='utf-8') as file:
     json_data = json.load(file)
-    
+
+external_id = uuid.uuid4()
+json_data['external_id'] = external_id
+
 login = props['atol.login']
 password = props['atol.password']
 
