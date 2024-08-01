@@ -1,0 +1,49 @@
+{
+    "timestamp":" 30.07.2024 12:05:31",
+    "external_id": "687yurut7hh8y6yhkhi4",
+    "receipt": {
+       "client": {
+          "email": "info@lex-energo.ru",
+          "phone": "+79882481550"
+       },
+       "company": {
+          "email": "info@lex-energo.ru",
+          "sno": "usn_income_outcome",
+          "inn": "2310228986",
+          "payment_address": "charge.eco-nrg.store",
+          "location": "350020, Краснодарский край, г. Краснодар, ул. Коммунаров, 221/1, офис 16"
+       },
+       "items": [
+          {
+             "name": "Пополнение лицевого счета для оплаты услуг по использованию зарядной инфраструктуры",
+             "price": 1.0,
+             "quantity": 1.0,
+             "sum": 1,
+             "payment_method": "full_payment",
+             "payment_object": "service",
+             "vat": {
+                "type": "none",
+                "sum": 0.0
+             },
+             "supplier_info": {
+                "name": "ООО «ЭКО-ЭНЕРГО»",
+                "inn": "2310228986"
+             }
+          }
+       ],
+       "payments":[
+          {
+             "type": 1,
+             "sum": 1.0
+          }
+       ],
+       "vats":[
+          {
+             "type": "none",
+             "sum": 0.0
+          }
+       ],
+       "additional_check_props": "25245435",
+       "total": 1.0
+    }
+ }
