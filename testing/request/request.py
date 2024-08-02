@@ -27,7 +27,7 @@ class Request:
 
     def request_with_response(self):
         self.make_request()
-        self.take_response()
+        self.receive_response()
 
     def make_request(self):
         if self.__method.lower() == 'post':
@@ -47,7 +47,7 @@ class Request:
                 params=self.__params,
             )
 
-    def take_response(self):
+    def receive_response(self):
         print(
             f'''
             Response: {self.__response}\n
