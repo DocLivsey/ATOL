@@ -65,24 +65,33 @@ class Request:
                 params=self.__params,
             )
 
-    def print_response(self):
-        if self.__response:
-            print(
-                f'''
-                Response: {self.__response}\n
-                As json: {self.__response.json()}\n
-                Reason: {self.__response.reason}\n
-                Text: {self.__response.text}\n
-                '''
-            )
-        else:
-            self.__logger.exception(f'before taking response you should make request')
+    def __response_logger__(self, function):
+        def wrapper(*args, **kwargs):
+            if self.__response:
+                return function(*args, **kwargs)
+            elif self.__response is None:
+                self.__logger.exception(f'before taking response you should make request')
+            else:
+                if self.__response.status_code == 400:
+                    self.__logger.exception('Bad request')
+                elif self.__response.status_code == 401:
+                    self.__logger.exception('Unauthorized or invalid login or password')
+        return wrapper
 
+    @__response_logger__
+    def print_response(self):
+        print(
+            f'''
+            Response: {self.__response}\n
+            As json: {self.__response.json()}\n
+            Reason: {self.__response.reason}\n
+            Text: {self.__response.text}\n
+            '''
+        )
+
+    @__response_logger__
     def receive_response(self):
-        if self.__response:
-            return self.__response
-        else:
-            self.__logger.exception(f'before taking response you should make request')
+        return self.__response
 
 
 class AtolRequest:
