@@ -2,7 +2,7 @@ import requests
 from ..parsing.from_props import read_properties
 
 
-prop_file = '../../resources/props.properties'
+prop_file = '../../props.properties'
 props = read_properties(prop_file)
 
 print(props)

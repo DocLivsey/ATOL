@@ -3,7 +3,7 @@ from testing.request.request import AtolRequest
 from testing.request.parsing.to_props import rewrite_properties
 
 
-path_to_props = '../../resources/props.properties'
+path_to_props = '../../props.properties'
 
 
 def get_token(properties_file: str):
