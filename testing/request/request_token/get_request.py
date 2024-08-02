@@ -9,6 +9,7 @@ path_to_props = '../../props.properties'
 def get_token(properties_file: str):
     request = AtolRequest()
     token = request.receive_token(method='GET')
+    print(f'take token: {token}')
     rewrite_properties(properties_file, {'token': token})
 
 
