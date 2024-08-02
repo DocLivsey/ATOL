@@ -1,38 +1,40 @@
-import requests
-from ..parsing.from_props import read_properties
+import _io
+import sys
+from typing import Union
+from structlog import get_logger
+from testing.request.request import AtolRequest
 
 
-prop_file = '../../props.properties'
-props = read_properties(prop_file)
+__logger = get_logger()
 
-print(props)
+default_path_to_json = ('C:\\Users\\user\\work_folder\\all_scripts\\repos\\doclivsey\\ATOL\\testing\\resources'
+                        '\\register_test_sell_check.json')
 
-group_code = 'group_code_45498'
-login = 'fbcf4290-602c-40e1-bedb-84ff2cda98aa'
-password = 'X9yTTzCL'
 
-token = 'ieh3KpTZmrBta7nhoVPduZaRKfAsiprx0uqy5oRRmHPmtx1cEGxxCy-H7ABb56vxO7vPD6LhR2fJyCucGRxHMfvcZWcxHb_wUYrUsGvoXtoZeFUUomrw86UzlDXPCa4h'
+def post_new_cheque(
+        cheque_file: Union[str, dict, _io.TextIOWrapper],
+        operation: str,
+        create_uuid_automaticly=False,
+):
+    request = AtolRequest()
+    request.register_new_cheque(
+        method='POST',
+        operation=operation,
+        cheque_as_json=cheque_file,
+        create_uuid_automaticly=create_uuid_automaticly,
+    )
 
-url = f'https://online.atol.ru/possystem/v4/{group_code}/sell'
 
-print(f'url = {url}\n')
+if __name__ == '__main__':
+    print(f'args = {sys.argv}')
+    try:
+        if len(sys.argv) == 1:
+            op = sys.argv[1]
+            post_new_cheque(default_path_to_json, op)
+        elif len(sys.argv) == 2:
+            op = sys.argv[1]
+            cheque = sys.argv[2]
+            post_new_cheque(cheque, op)
+    except IndexError:
+        __logger.error('No operation')
 
-headers = {
-    'Content-type': 'application/json; charset=utf-8;',
-    'Token': token
-}
- 
-response = requests.post(
-    url=url,
-    headers=headers,
-    json=,
-)
-
-print(
-    f'''
-    Response: {response}\n
-    As json: {response.json}\n
-    Reason: {response.reason}\n
-    Text: {response.text}\n
-    '''
-)

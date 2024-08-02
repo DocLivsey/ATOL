@@ -1,8 +1,3 @@
-from request.parsing.from_props import read_properties
-import uuid
-import json
-import requests
-from request.request import AtolRequest, Request
+from testing.request.make_cheque.post_new_cheque import post_new_cheque, default_path_to_json
 
-request = AtolRequest()
-print(f'result = {request.receive_token(method="POST")}')
+post_new_cheque(default_path_to_json, 'sell', create_uuid_automaticly=True)

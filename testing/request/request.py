@@ -1,3 +1,6 @@
+import _io
+import json
+import uuid
 from typing import Union
 from structlog import get_logger
 import requests
@@ -7,6 +10,8 @@ from testing.config import *
 class Request:
 
     __logger = get_logger()
+
+    OK_GREEN = '\033[92m'
 
     def __init__(
             self,
@@ -77,11 +82,14 @@ class Request:
                     self.__logger.exception('Bad request')
                 elif self.__response.status_code == 401:
                     self.__logger.exception('Unauthorized or invalid login or password')
+                elif self.__response.status_code == 404:
+                    self.__logger.error('Not found')
         return wrapper
 
     @__response_logger__
     def print_response(self):
         print(
+            self.OK_GREEN +
             f'''
             Response: {self.__response}\n
             As json: {self.__response.json()}\n
@@ -96,21 +104,29 @@ class Request:
 
 
 class AtolRequest:
+
     __ATOL_URL = properties_data[ATOL_URL]
     __ATOL_GET_TOKEN_URL = __ATOL_URL + 'getToken'
     __ATOL_LOGIN = properties_data[ATOL_LOGIN]
     __ATOL_PASSWORD = properties_data[ATOL_PASSWORD]
+    __GROUP_CODE = properties_data[GROUP_CODE]
+    __TOKEN = properties_data[TOKEN]
 
     def __init__(
             self,
             atol_url=__ATOL_URL,
             atol_login=__ATOL_LOGIN,
             atol_password=__ATOL_PASSWORD,
+            group_code=__GROUP_CODE,
+            token=__TOKEN,
+
     ):
         self.__ATOL_URL = atol_url
         self.__ATOL_GET_TOKEN_URL = atol_url + 'getToken'
         self.__ATOL_LOGIN = atol_login
         self.__ATOL_PASSWORD = atol_password
+        self.__GROUP_CODE = group_code
+        self.__TOKEN = token
 
     def receive_token(self, method: str = 'GET'):
         url = self.__ATOL_GET_TOKEN_URL
@@ -133,7 +149,35 @@ class AtolRequest:
         )
         response = request.request_and_response(want_to_receive=True)
         token = response.json()['token']
+        self.__TOKEN = token
         return token
 
-    def register_new_cheque(self, method: str = 'POST'):
-        pass
+    def register_new_cheque(
+            self,
+            method: str = 'POST',
+            operation: str = 'sell',
+            cheque_as_json: Union[str, dict, _io.TextIOWrapper] = None,
+            create_uuid_automaticly=False,
+    ):
+        if type(cheque_as_json) is str:
+            if cheque_as_json.endswith('.json'):
+                with open(cheque_as_json, 'r') as json_file:
+                    cheque_as_json = json.load(json_file)
+            else:
+                cheque_as_json = json.loads(cheque_as_json)
+        elif type(cheque_as_json) is _io.TextIOWrapper:
+            cheque_as_json = json.load(cheque_as_json)
+        url = f'{self.__ATOL_URL}{self.__GROUP_CODE}/{operation}'
+        headers = {
+            'Content-type': 'application/json; charset=utf-8;',
+            'Token': self.__TOKEN
+        }
+        if create_uuid_automaticly:
+            cheque_as_json['external_id'] = uuid.uuid4().__str__()
+        request = Request(
+            url=url,
+            headers=headers,
+            json=cheque_as_json,
+            method=method,
+        )
+        request.request_and_response(want_to_receive=True)
