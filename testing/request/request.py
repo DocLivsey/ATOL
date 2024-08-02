@@ -65,8 +65,9 @@ class Request:
                 params=self.__params,
             )
 
-    def __response_logger__(self, function):
-        def wrapper(*args, **kwargs):
+    @staticmethod
+    def __response_logger__(function):
+        def wrapper(self, *args, **kwargs):
             if self.__response:
                 return function(*args, **kwargs)
             elif self.__response is None:
