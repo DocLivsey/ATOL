@@ -103,9 +103,27 @@ class AtolRequest:
         self.__ATOL_PASSWORD = atol_password
 
     def receive_token(self, method: str = 'GET'):
-        url = self.__ATOL_GET_TOKEN_URL + f'?login={self.__ATOL_LOGIN}&pass={self.__ATOL_PASSWORD}'
-        request = Request(url=url, method=method)
+        url = self.__ATOL_GET_TOKEN_URL
+        headers = {
+            'Content-type': 'application/json; charset=utf-8;',
+        }
+        json = None
+        if method.lower() == 'get':
+            url += f'?login={self.__ATOL_LOGIN}&pass={self.__ATOL_PASSWORD}'
+        elif method.lower() == 'post':
+            json = {
+                'login': self.__ATOL_LOGIN,
+                'pass': self.__ATOL_PASSWORD,
+            }
+        request = Request(
+            url=url,
+            headers=headers,
+            json=json,
+            method=method,
+        )
         response = request.request_and_response(want_to_receive=True)
         token = response.json()['token']
         return token
 
+    def register_new_cheque(self, method: str = 'POST'):
+        pass
