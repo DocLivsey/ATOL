@@ -8,7 +8,7 @@ class Request:
             self,
             properties='../props.properties',
             url_props_name='url',
-            json='./make_check/register_test_sell_check.json',
+            json='./make_cheque/register_test_sell_check.json',
             method: str = None
     ):
         self.__method = method
