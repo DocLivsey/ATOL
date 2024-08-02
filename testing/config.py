@@ -1,9 +1,7 @@
-from request.parsing.from_props import read_properties
-from request.parsing.to_props import rewrite_properties, write_properties
-from request.parsing.delete_props import delete_properties
+from testing.request.parsing.from_props import read_properties
 
 
-properties_file = 'resources/props.properties'
+properties_file = 'C:\\Users\\user\\work_folder\\all_scripts\\repos\\doclivsey\\ATOL\\testing\\props.properties'
 properties_data = read_properties(properties_file)
 
 
