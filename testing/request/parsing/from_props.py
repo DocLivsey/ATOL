@@ -1,3 +1,9 @@
+from structlog import get_logger
+
+
+__logger = get_logger(__name__)
+
+
 def read_properties(from_file):
     props = {}
     with open(from_file) as properties:
@@ -5,6 +11,6 @@ def read_properties(from_file):
             try:
                 k, v = line.split('=')
                 props[k] = v.rstrip()
-            except:
-                pass
+            except Exception as e:
+                __logger.exception(f'failed to parse properties line with exception {e} in line "{line}"')
         return props
