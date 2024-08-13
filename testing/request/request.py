@@ -38,7 +38,7 @@ class Request:
 
     def make_request(self):
         if self.__method.lower() == 'post':
-            self.__response = requests.get(
+            self.__response = requests.post(
                 url=self.__url,
                 headers=self.__headers,
                 json=self.__json,
@@ -161,7 +161,7 @@ class AtolRequest:
     ):
         if type(cheque_as_json) is str:
             if cheque_as_json.endswith('.json'):
-                with open(cheque_as_json, 'r') as json_file:
+                with open(cheque_as_json, 'r', encoding='utf-8') as json_file:
                     cheque_as_json = json.load(json_file)
             else:
                 cheque_as_json = json.loads(cheque_as_json)
