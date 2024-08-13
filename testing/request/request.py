@@ -74,7 +74,7 @@ class Request:
     def __response_logger__(function):
         def wrapper(self, *args, **kwargs):
             if self.__response:
-                return function(*args, **kwargs)
+                return function(self, *args, **kwargs)
             elif self.__response is None:
                 self.__logger.exception(f'before taking response you should make request')
             else:
