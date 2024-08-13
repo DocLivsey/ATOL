@@ -3,7 +3,7 @@
     "external_id": "687yurut7hh8y6yhkhi4",
     "receipt": {
        "client": {
-          "email": "",
+          "email": "Ludunanitudu@gmail.com",
           "phone": "+79189583562"
        },
        "company": {
@@ -16,9 +16,9 @@
        "items": [
           {
              "name": "Пополнение лицевого счета для оплаты услуг по использованию зарядной инфраструктуры",
-             "price": 1.0,
+             "price": 5.0,
              "quantity": 1.0,
-             "sum": 1,
+             "sum": 5,
              "payment_method": "full_payment",
              "payment_object": "service",
              "vat": {
@@ -34,7 +34,7 @@
        "payments":[
           {
              "type": 1,
-             "sum": 1.0
+             "sum": 5.0
           }
        ],
        "vats":[
@@ -44,6 +44,6 @@
           }
        ],
        "additional_check_props": "25245435",
-       "total": 1.0
+       "total": 5.0
     }
  }
