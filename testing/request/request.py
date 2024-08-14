@@ -12,6 +12,7 @@ class Request:
     __logger = get_logger()
 
     OK_GREEN = '\033[92m'
+    RESET = '\033[0m'
 
     def __init__(
             self,
@@ -95,7 +96,8 @@ class Request:
             As json: {self.__response.json()}\n
             Reason: {self.__response.reason}\n
             Text: {self.__response.text}\n
-            '''
+            ''' +
+            self.RESET
         )
 
     @__response_logger__
