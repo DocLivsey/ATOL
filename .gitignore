@@ -1,5 +1,6 @@
 ./.gitignore
 ./.idea/
+/.idea/
 ./.vscode/
 
 ./testing/.env
