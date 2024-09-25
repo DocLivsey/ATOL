@@ -1,7 +1,13 @@
 ./.gitignore
-./.idea
-./.vscode
+./.idea/
+./.vscode/
 
 ./testing/.env
 
 ./venv/
+/.venv/
+
+*.properties
+
+# TESTS
+TEST.py
