@@ -25,6 +25,7 @@ def post_new_cheque(
     )
 
 
+# TODO: code this via argparse lib
 if __name__ == '__main__':
     print(f'args = {sys.argv}')
     try:
