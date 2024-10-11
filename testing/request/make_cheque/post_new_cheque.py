@@ -8,7 +8,7 @@ from testing.request.request import AtolRequest
 __logger = get_logger()
 
 default_path_to_json = ('C:\\Users\\user\\work_folder\\all_scripts\\repos\\doclivsey\\ATOL\\testing\\resources'
-                        '\\register_test_sell_check.json')
+                        '\\register_test_sell_receipt.json')
 
 
 def post_new_cheque(
